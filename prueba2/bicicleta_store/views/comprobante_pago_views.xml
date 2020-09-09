@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="comprobantepago_cliente_view_tree" model="ir.ui.view">
+        <field name="name">comprobantepago.cliente.view.tree</field>
+        <field name="model">bicicletastore.comprobantepago.cliente</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="fecha_emision"/>
+                <field name="fecha_vencimiento"/>
+                <field name="cliente_id"/>
+                <field name="vendedor_id"/>
+                <field name="tipo"/>
+                <field name="termino_pago"/>
+                <field name="moneda"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="comprobantepago_cliente_view_form" model="ir.ui.view">
+        <field name="name">comprobantepago.cliente.view.form</field>
+        <field name="model">bicicletastore.comprobantepago.cliente</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_set_confirm" type="object" string="Confirmar" class="btn btn-primary"
+                            attrs="{'invisible': ['|',('state', '=', 'confirm'),('state', '=', 'paid')]}"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <header>
+                    <button name="action_set_paid" type="object" string="Pagado" class="btn btn-primary"
+                    attrs="{'invisible': ['|',('state', '=', 'budget'),('state', '=', 'paid')]}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="cliente_id" options="{'no_open': True}"/> <!--options="{'no_create_edit': True} ##### "-->
+                            <field name="vendedor_id" options="{'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="fecha_emision"/>
+                            <field name="termino_pago"/>
+                            <field name="fecha_vencimiento"/>
+                            <field name="tipo"/>
+                            <field name="moneda"/>
+                            <field name="state_pago"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Productos">
+                            <field name="line_ids"
+                                   attrs="{'readonly': [('state', '!=', 'budget')]}"
+                                   context="{'default_comprobante_id': id}">
+                                <tree editable="top">
+                                    <field name="comprobante_id" invisible="1"/>
+                                    <field name="bicicleta_id"/>
+                                    <field name="detalle"/>
+                                    <field name="precio"/>
+                                    <field name="qty"/>
+                                    <field name="total"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pagos">
+                            <field name="pago_ids"
+                                   attrs="{'readonly': ['|',('state', '=', 'budget'),('state', '=', 'paid')],
+                                           'invisible':[('state', '=', 'budget')]}"
+                                   context="{'default_comprobante_id': id}">
+                                <tree editable="top">
+                                    <field name="comprobante_id" invisible="1"/>
+                                    <field name="fecha_pago"/>
+                                    <field name="monto"/>
+                                    <field name="user_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <div class="text-right">
+                        <label for="total" string="Total:"/>
+                        <field name="total" readonly="1" force_save="1"/>
+                    </div>
+                    <div class="text-right">
+                        <label for="saldo" string="Saldo:"/>
+                        <field name="saldo" readonly="1" force_save="1"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="comprobantepago_cliente_action" model="ir.actions.act_window">
+        <field name="name">Comprobante de Cliente</field>
+        <field name="res_model">bicicletastore.comprobantepago.cliente</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="comprobantepago_cliente_menu_action" action="comprobantepago_cliente_action" sequence="10" parent="comprobante_pago_menu"/>
+</odoo>

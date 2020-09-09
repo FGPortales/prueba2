@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="videostore_menu_root" name="Tienda de video" sequence="50"/>
+        <menuitem id="tienda_menu" name="Tienda" sequence="10" parent="videostore_menu_root"/>
+
+            <menuitem id="actor_menu" name="Actor" sequence="20" parent="tienda_menu"/>
+</odoo>

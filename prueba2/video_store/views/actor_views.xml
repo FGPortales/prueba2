@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Lista de Actores -->
+    <record id="actor_view_tree" model="ir.ui.view">
+        <field name="name">actor.view.tree</field>
+        <field name="model">videostore.actor</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="apellido"/>
+                <field name="edad"/>
+                <field name="tipo_doc"/>
+                <field name="num_doc"/>
+                <field name="direccion"/>
+                <field name="telefono"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Formulario de Actor -->
+    <record id="actor_view_form" model="ir.ui.view">
+        <field name="name">actor.view.form</field>
+        <field name="model">videostore.actor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="apellido"/>
+                            <field name="edad"/>
+                        </group>
+                        <group>
+                            <field name="tipo_doc"/>
+                            <field name="num_doc" required="1"/>
+                            <field name="direccion"/>
+                            <field name="telefono"/>
+                        </group>
+                    </group>
+                    <field name="line_ids" context="{'default_actor_id': id}">
+                        <tree>
+                            <field name="pelicula_id"/>
+                            <field name="actor_id" invisible="1"/>
+                            <field name="sueldo"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="pelicula_id"/>
+                                    <field name="actor_id" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="sueldo"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="actor_action" model="ir.actions.act_window">
+        <field name="name">Actores</field>
+        <field name="res_model">videostore.actor</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="actor_view_tree"/>
+    </record>
+
+    <menuitem id="actor_menu" action="actor_action" name="Actor" sequence="20" parent="tienda_menu"/>
+
+</odoo>

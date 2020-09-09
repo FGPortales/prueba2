@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Lista de Películas -->
+    <record id="pelicula_view_tree" model="ir.ui.view">
+        <field name="name">pelicula.view.tree</field>
+        <field name="model">videostore.pelicula</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="duracion"/>
+                <field name="director"/>
+                <field name="anio_lanzamiento"/>
+                <field name="genero"/>
+                <field name="numero"/>
+                <field name="resenia"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Formulario de Películas -->
+    <record id="pelicula_view_form" model="ir.ui.view">
+        <field name="name">pelicula.view.form</field>
+        <field name="model">videostore.pelicula</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="duracion"/>
+                            <field name="director"/>
+                        </group>
+                        <group>
+                            <field name="anio_lanzamiento"/>
+                            <field name="genero"/>
+                            <field name="numero"/>
+                        </group>
+                    </group>
+                    <label for="resenia"/>
+                    <field name="resenia"/>
+                    <label for="line_ids"/>
+                    <field name="line_ids" context="{'default_pelicula_id': id}">
+                        <tree>
+                            <field name="pelicula_id" invisible="1"/>
+                            <field name="actor_id"/>
+                            <field name="sueldo"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="pelicula_id" invisible="1"/>
+                                    <field name="actor_id"/>
+                                </group>
+                                <group>
+                                    <field name="sueldo"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pelicula_action" model="ir.actions.act_window">
+        <field name="name">Películas</field>
+        <field name="res_model">videostore.pelicula</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="pelicula_view_tree"/>
+    </record>
+
+    <menuitem id="pelicula_menu" action="pelicula_action" name="Película" sequence="10" parent="tienda_menu"/>
+
+    <!-- Peliculas x Actor -->
+    <record id="pelicula_actor_view_tree" model="ir.ui.view">
+        <field name="name">pelicula.actor.view.tree</field>
+        <field name="model">videostore.pelicula.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="pelicula_id"/>
+                <field name="actor_id"/>
+                <field name="sueldo"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pelicula_actor_view_form" model="ir.ui.view">
+        <field name="name">pelicula.actor.view.form</field>
+        <field name="model">videostore.pelicula.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="pelicula_id"/>
+                            <field name="actor_id"/>
+                        </group>
+                        <group>
+                            <field name="sueldo"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pelicula_actor_action" model="ir.actions.act_window">
+        <field name="name">Películas Actores</field>
+        <field name="res_model">videostore.pelicula.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="pelicula_actor_menu" action="pelicula_actor_action" name="Película Actor" sequence="30" parent="tienda_menu"/>
+</odoo>

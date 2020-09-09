@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_videostore_pelicula,access_videostore_pelicula,model_videostore_pelicula,base.group_user,1,1,1,1
+access_videostore_actor,access_videostore_actor,model_videostore_actor,base.group_user,1,1,1,1
+access_videostore_pelicula_line,access_videostore_pelicula_line,model_videostore_pelicula_line,base.group_user,1,1,1,1

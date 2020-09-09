@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pelicula_view_form" model="ir.ui.view">
+        <field name="name">pelicula.view.form.inherit</field>
+        <field name="model">videostore.pelicula</field>
+        <field name="inherit_id" ref="video_store.pelicula_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='duracion']" position="before">
+                <field name="titulo_original"/>
+            </xpath>
+            <xpath expr="//field[@name='duracion']" position="attributes">
+                <attribute name="required">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="bicicletastore_menu_root"
+              name="Tienda Bicicleta"
+              sequence="50"/>
+        <menuitem id="comprobante_pago_menu"
+                  name="Comprobante de pago"
+                  sequence="10"
+                  parent="bicicletastore_menu_root"/>
+        <menuitem id="persona_menu"
+                  name="Persona"
+                  sequence="20"
+                  parent="bicicletastore_menu_root"/>
+
+</odoo>
