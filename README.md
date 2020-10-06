@@ -1,5 +1,5 @@
 # Test_1
-Repository/n
+Repository\n
 Modules - Odoo:
 -bicicleta_store
 -video_store
